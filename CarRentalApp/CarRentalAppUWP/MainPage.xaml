@@ -1,0 +1,72 @@
+﻿<Page
+    x:Class="CarRentalAppUWP.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CarRentalAppUWP"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <NavigationView x:Name="MainNavigation"
+                        IsSettingsVisible="False"
+                        OpenPaneLength="200"
+                        ItemInvoked="MainNavigation_ItemInvoked"
+                        PaneTitle="{x:Bind UserViewModel.LoggedUser.UserName, Mode=OneWay}">
+            >
+
+            <NavigationView.MenuItems>
+                <NavigationViewItem x:Name="NavCarReserve"
+                                    Content="CarReserve"
+                                    Icon="List"
+                                    Tag="NavCarReserve"
+                                    />
+                <NavigationViewItem x:Name="NavAutomovel"
+                                    Content="Automoveis"
+                                    Icon="Clock"
+                                    Tag="NavAutomoveis"/>
+                <NavigationViewItem x:Name="NavCategories"
+                                    Content="Categorias"
+                                    Icon="Library"
+                                    Tag="NavCategoria"
+                                    IsEnabled="{x:Bind UserViewModel.IsLogged, Mode=OneWay}"/>
+                <NavigationViewItem x:Name="NavLocalidades"
+                                    Content="Localidades"
+                                    Icon="Globe"
+                                    Tag="NavLocalidades"
+                                    IsEnabled="{x:Bind UserViewModel.IsLogged,Mode=OneWay}"/>
+                <NavigationViewItem x:Name="NavProprietarios"
+                                    Content="Proprietarios"
+                                    Icon="People"
+                                    Tag="NavProprietario"
+                                    IsEnabled="{x:Bind UserViewModel.IsLogged, Mode=OneWay}"/>
+            </NavigationView.MenuItems>
+            <NavigationView.PaneFooter>
+                <StackPanel>
+                    <NavigationViewItem x:Name="NavLogin"
+                                    Content="Login"
+                                    Icon="Permissions"
+                                    Tapped="NavLogin_Tapped"
+                                    Visibility="{x:Bind UserViewModel.isNotLogged, Mode=OneWay}"    />
+                    <NavigationViewItem x:Name="NavLogout"
+                                        Content="Logout"
+                                        Icon="NewWindow"
+                                        Tapped="NavLogout_Tapped"
+                                        Visibility="{x:Bind UserViewModel.IsLogged, Mode=OneWay}"/>
+                    <NavigationViewItem x:Name="NavRegister"
+                                    Content="Register"
+                                    Icon="Contact" 
+                                    Tapped="NavRegister_Tapped"
+                                    Visibility="{x:Bind UserViewModel.isNotLogged, Mode=OneWay}"
+                                    />
+
+                </StackPanel>
+            </NavigationView.PaneFooter>
+ 
+
+
+
+        </NavigationView>
+    </Grid>
+</Page>

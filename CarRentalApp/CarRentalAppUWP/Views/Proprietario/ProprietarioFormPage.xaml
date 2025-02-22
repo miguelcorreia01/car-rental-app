@@ -1,0 +1,85 @@
+﻿<Page
+    x:Class="CarRentalAppUWP.Views.Proprietario.ProprietarioFormPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CarRentalAppUWP.Views.Proprietario"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="{x:Bind ProprietarioViewModel.FormTitle}"
+                   Style="{StaticResource HeaderTextBlockStyle}"/>
+            <CommandBar x:Name="mainComandBar" Grid.Column="1"
+                        VerticalAlignment="Center"
+                        Background="Transparent"
+                        OverflowButtonVisibility="Collapsed"
+                        DefaultLabelPosition="Right">
+                <AppBarButton x:Name="btnSave"
+                              Click="btnSave_Click"
+                              Icon="Save"
+                              Label="Guardar"
+                              ToolTipService.ToolTip="Guardar Proprietario"
+                              IsEnabled="{x:Bind ProprietarioViewModel.Valid, Mode=OneWay}">
+                    <FlyoutBase.AttachedFlyout>
+                        <Flyout>
+                            <Border Background="red"
+                                    BorderBrush="Black"
+                                    BorderThickness="2"
+                                    Margin="5"
+                                    Padding="10,5">
+                                <TextBlock Text="Já existe um proprietario com esse nome"
+                                           Foreground="White"/>
+                            </Border>
+                        </Flyout>
+                    </FlyoutBase.AttachedFlyout>
+                </AppBarButton>
+                <AppBarButton x:Name="btnCancel"
+                              Click="btnCancel_Click"
+                              Icon="Cancel"
+                              Label="Cancelar"/>
+            </CommandBar>
+        </Grid>
+        <StackPanel Grid.Row="1">
+            <TextBox x:Name="name" Header="Nome"
+                     Text="{x:Bind ProprietarioViewModel.ProprietarioName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <Border Background="red"
+                                   BorderBrush="Black"
+                                   BorderThickness="2"
+                                   Margin="5"
+                                   Padding="10,5"
+                                   Visibility="{x:Bind ProprietarioViewModel.InValid, Mode=OneWay}">
+                
+                <TextBlock Text="Texto invalido para nome de um usuário"
+                                          Foreground="White"/>
+            </Border>
+
+            <TextBox x:Name="IdUser" Header="IdUser"
+                     Text="{x:Bind UserViewModel.User.Id, Mode=TwoWay}"/>
+            <Border Background="red"
+                                   BorderBrush="Black"
+                                   BorderThickness="2"
+                                   Margin="5"
+                                   Padding="10,5"
+                                   Visibility="{x:Bind ProprietarioViewModel.InValid, Mode=OneWay}">
+
+                <TextBlock Text="Texto invalido para Id de um usuário"
+                                          Foreground="White"/>
+                
+
+            </Border>
+            <TextBox x:Name="cota" Header="Cota"
+                     Text="{x:Bind ProprietarioViewModel.UserProprietario.Cota, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        </StackPanel>
+    </Grid>
+</Page>

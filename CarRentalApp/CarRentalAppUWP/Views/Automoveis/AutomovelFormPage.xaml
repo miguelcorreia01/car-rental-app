@@ -1,0 +1,84 @@
+﻿<Page
+    x:Class="CarRentalAppUWP.Views.Automoveis.AutomovelFormPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CarRentalAppUWP.ViewModels"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:data="using:CarRentalApp.Domain.Models"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="{x:Bind AutomovelViewModel.FormTitle}"
+                       Style="{StaticResource HeaderTextBlockStyle}"/>
+            <CommandBar x:Name="mainCommandBar" Grid.Column="1"
+                        VerticalAlignment="Center"
+                        Background="Transparent"
+                        OverflowButtonVisibility="Collapsed"
+                        DefaultLabelPosition="Right">
+                <AppBarButton x:Name="btnSave"
+                              Click="btnSave_Click"
+                              Icon="Save"
+                             Label="Guardar"
+                             ToolTipService.ToolTip="Registar Automóvel"
+                             IsEnabled="{x:Bind AutomovelViewModel.Valid, Mode=OneWay}">
+                    <FlyoutBase.AttachedFlyout>
+                        <Flyout>
+                            <Border Background="red"
+                                   BorderBrush="Black"
+                                   BorderThickness="2"
+                                   Margin="5"
+                                   Padding="10,5">
+                                <TextBlock Text="Já existe uma categoria com esse nome"
+                                          Foreground="White"/>
+                            </Border>
+                        </Flyout>
+                    </FlyoutBase.AttachedFlyout>
+                </AppBarButton>
+                <AppBarButton x:Name="btnCancel"
+                             Click="btnCancel_Click"
+                             Icon="Cancel"
+                             Label="Cancelar"/>
+            </CommandBar>
+        </Grid>
+        <StackPanel Grid.Row="1">
+            <TextBox x:Name="name" Header="Name"
+                       Text="{x:Bind AutomovelViewModel.AutomovelMatricula, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <Border Background="red"
+                                   BorderBrush="Black"
+                                   BorderThickness="2"
+                                   Margin="5"
+                                   Padding="10,5"
+                                   Visibility="{x:Bind AutomovelViewModel.InValid, Mode=OneWay}">
+                <TextBlock Text="Texto inválido para placa de matricula"
+                                          Foreground="White"/>
+
+            </Border>
+            <TextBox x:Name="marca" Header="Marca"
+                       Text="{x:Bind AutomovelViewModel.Automovel.Marca, Mode=TwoWay}"/>
+            <TextBox x:Name="modelo" Header="Modelo"
+                       Text="{x:Bind AutomovelViewModel.Automovel.Modelo, Mode=TwoWay}"/>
+            <CalendarDatePicker x:Name="ano_fabrico" Header="Ano_Frabrico"/>
+            <TextBox x:Name="categoria" Header="Categoria"
+                       Text="{x:Bind CategoriaViewModel.CategoriaName, Mode=TwoWay}"/>
+            <TextBox x:Name="proprietario" Header="Proprietario"
+                       Text="{x:Bind CategoriaViewModel.CategoriaName, Mode=TwoWay}"/>
+        </StackPanel>
+    </Grid>
+
+
+
+
+</Page>
